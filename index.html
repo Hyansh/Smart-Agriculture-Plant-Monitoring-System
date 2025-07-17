@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Agriculture Monitor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <h1 class="app-title">Smart Farm Monitor</h1>
+            <div class="connection-status">
+                <span class="status-indicator online"></span>
+                <span class="status-text">Connected</span>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="bottom-nav">
+            <button class="nav-item active" data-screen="dashboard">
+                <span class="nav-icon">📊</span>
+                <span class="nav-label">Dashboard</span>
+            </button>
+            <button class="nav-item" data-screen="sensors">
+                <span class="nav-icon">🌡️</span>
+                <span class="nav-label">Sensors</span>
+            </button>
+            <button class="nav-item" data-screen="control">
+                <span class="nav-icon">🎛️</span>
+                <span class="nav-label">Control</span>
+            </button>
+            <button class="nav-item" data-screen="analytics">
+                <span class="nav-icon">📈</span>
+                <span class="nav-label">Analytics</span>
+            </button>
+            <button class="nav-item" data-screen="settings">
+                <span class="nav-icon">⚙️</span>
+                <span class="nav-label">Settings</span>
+            </button>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Screen -->
+            <div class="screen active" id="dashboard">
+                <div class="screen-header">
+                    <h2>Real-time Monitoring</h2>
+                    <p class="subtitle">1 Acre Coverage Area</p>
+                </div>
+
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-icon">💧</div>
+                        <div class="metric-info">
+                            <h3>Soil Moisture</h3>
+                            <div class="metric-value">65<span class="unit">%</span></div>
+                            <div class="metric-status optimal">Optimal</div>
+                        </div>
+                    </div>
+
+                    <div class="metric-card">
+                        <div class="metric-icon">🌡️</div>
+                        <div class="metric-info">
+                            <h3>Temperature</h3>
+                            <div class="metric-value">24<span class="unit">°C</span></div>
+                            <div class="metric-status optimal">Optimal</div>
+                        </div>
+                    </div>
+
+                    <div class="metric-card">
+                        <div class="metric-icon">💨</div>
+                        <div class="metric-info">
+                            <h3>Humidity</h3>
+                            <div class="metric-value">72<span class="unit">%</span></div>
+                            <div class="metric-status optimal">Good</div>
+                        </div>
+                    </div>
+
+                    <div class="metric-card">
+                        <div class="metric-icon">⚗️</div>
+                        <div class="metric-info">
+                            <h3>pH Level</h3>
+                            <div class="metric-value">6.8</div>
+                            <div class="metric-status optimal">Neutral</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="weather-card card">
+                    <h3>Weather Conditions</h3>
+                    <div class="weather-info">
+                        <span class="weather-icon">⛅</span>
+                        <span class="weather-desc">Partly Cloudy</span>
+                    </div>
+                </div>
+
+                <div class="field-status card">
+                    <h3>Field Status</h3>
+                    <div class="status-indicator-large healthy">
+                        <span class="status-icon">🌱</span>
+                        <span class="status-text">Healthy</span>
+                    </div>
+                </div>
+
+                <div class="quick-actions">
+                    <button class="btn btn--primary action-btn" id="quickIrrigation">
+                        💧 Start Irrigation
+                    </button>
+                    <button class="btn btn--secondary action-btn" id="viewAlerts">
+                        🔔 View Alerts
+                    </button>
+                </div>
+            </div>
+
+            <!-- Sensor Data Screen -->
+            <div class="screen" id="sensors">
+                <div class="screen-header">
+                    <h2>Sensor Data</h2>
+                    <p class="subtitle">Detailed Readings & History</p>
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="sensorChart" width="400" height="200"></canvas>
+                </div>
+
+                <div class="sensor-details">
+                    <div class="sensor-section">
+                        <h3>NPK Levels</h3>
+                        <div class="npk-grid">
+                            <div class="npk-item">
+                                <span class="npk-label">Nitrogen</span>
+                                <div class="npk-bar">
+                                    <div class="npk-fill" style="width: 45%"></div>
+                                </div>
+                                <span class="npk-value">45%</span>
+                            </div>
+                            <div class="npk-item">
+                                <span class="npk-label">Phosphorus</span>
+                                <div class="npk-bar">
+                                    <div class="npk-fill" style="width: 38%"></div>
+                                </div>
+                                <span class="npk-value">38%</span>
+                            </div>
+                            <div class="npk-item">
+                                <span class="npk-label">Potassium</span>
+                                <div class="npk-bar">
+                                    <div class="npk-fill" style="width: 52%"></div>
+                                </div>
+                                <span class="npk-value">52%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sensor-readings">
+                        <h3>Recent Readings</h3>
+                        <div class="readings-list">
+                            <div class="reading-item">
+                                <span class="reading-time">2 min ago</span>
+                                <span class="reading-value">Soil: 65% | Temp: 24°C</span>
+                            </div>
+                            <div class="reading-item">
+                                <span class="reading-time">5 min ago</span>
+                                <span class="reading-value">Soil: 64% | Temp: 23°C</span>
+                            </div>
+                            <div class="reading-item">
+                                <span class="reading-time">8 min ago</span>
+                                <span class="reading-value">Soil: 67% | Temp: 25°C</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn--outline export-btn">📊 Export Data</button>
+            </div>
+
+            <!-- Control Panel Screen -->
+            <div class="screen" id="control">
+                <div class="screen-header">
+                    <h2>Control Panel</h2>
+                    <p class="subtitle">System Operations</p>
+                </div>
+
+                <div class="control-section">
+                    <h3>Operation Mode</h3>
+                    <div class="mode-toggle">
+                        <button class="mode-btn active" data-mode="auto">Auto</button>
+                        <button class="mode-btn" data-mode="manual">Manual</button>
+                    </div>
+                </div>
+
+                <div class="control-section">
+                    <h3>Irrigation Zones</h3>
+                    <div class="zones-grid">
+                        <div class="zone-card">
+                            <h4>Zone 1</h4>
+                            <div class="zone-status active">Running</div>
+                            <div class="zone-controls">
+                                <button class="btn btn--sm zone-btn on">ON</button>
+                                <button class="btn btn--sm btn--secondary zone-btn">OFF</button>
+                            </div>
+                        </div>
+                        <div class="zone-card">
+                            <h4>Zone 2</h4>
+                            <div class="zone-status">Stopped</div>
+                            <div class="zone-controls">
+                                <button class="btn btn--sm zone-btn">ON</button>
+                                <button class="btn btn--sm btn--secondary zone-btn on">OFF</button>
+                            </div>
+                        </div>
+                        <div class="zone-card">
+                            <h4>Zone 3</h4>
+                            <div class="zone-status">Stopped</div>
+                            <div class="zone-controls">
+                                <button class="btn btn--sm zone-btn">ON</button>
+                                <button class="btn btn--sm btn--secondary zone-btn on">OFF</button>
+                            </div>
+                        </div>
+                        <div class="zone-card">
+                            <h4>Zone 4</h4>
+                            <div class="zone-status">Stopped</div>
+                            <div class="zone-controls">
+                                <button class="btn btn--sm zone-btn">ON</button>
+                                <button class="btn btn--sm btn--secondary zone-btn on">OFF</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="control-section">
+                    <h3>Irrigation Schedule</h3>
+                    <div class="schedule-inputs">
+                        <div class="form-group">
+                            <label class="form-label">Morning Schedule</label>
+                            <input type="time" class="form-control" value="06:00" id="morningTime">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Evening Schedule</label>
+                            <input type="time" class="form-control" value="18:00" id="eveningTime">
+                        </div>
+                    </div>
+                    <button class="btn btn--primary">Update Schedule</button>
+                </div>
+
+                <div class="emergency-section">
+                    <button class="btn emergency-btn">🚨 Emergency Stop</button>
+                </div>
+            </div>
+
+            <!-- Analytics Screen -->
+            <div class="screen" id="analytics">
+                <div class="screen-header">
+                    <h2>Analytics</h2>
+                    <p class="subtitle">Performance Insights</p>
+                </div>
+
+                <div class="analytics-cards">
+                    <div class="analytics-card">
+                        <h3>Crop Health</h3>
+                        <div class="metric-value large">85<span class="unit">%</span></div>
+                        <div class="metric-trend positive">↗ +5% from last week</div>
+                    </div>
+                    <div class="analytics-card">
+                        <h3>Water Efficiency</h3>
+                        <div class="metric-value large">78<span class="unit">%</span></div>
+                        <div class="metric-trend positive">↗ +3% from last week</div>
+                    </div>
+                    <div class="analytics-card">
+                        <h3>Yield Prediction</h3>
+                        <div class="metric-value large">92<span class="unit">%</span></div>
+                        <div class="metric-trend positive">↗ +8% from last week</div>
+                    </div>
+                </div>
+
+                <div class="system-architecture">
+                    <h3>System Architecture</h3>
+                    <img src="https://ppl-ai-code-interpreter-files.s3.amazonaws.com/web/direct-files/2a766ee1f53d4b0ed089cb2b53a38e6e/178fe314-b9bb-46e9-bd35-9940249a0986/5c0acaed.png" alt="Smart Agriculture System Architecture" class="architecture-image">
+                </div>
+
+                <div class="recommendations">
+                    <h3>Recommendations</h3>
+                    <div class="recommendation-item">
+                        <span class="recommendation-icon">💧</span>
+                        <div class="recommendation-content">
+                            <h4>Optimize Irrigation</h4>
+                            <p>Reduce morning watering by 15% based on soil moisture trends</p>
+                        </div>
+                    </div>
+                    <div class="recommendation-item">
+                        <span class="recommendation-icon">🌱</span>
+                        <div class="recommendation-content">
+                            <h4>Nutrient Management</h4>
+                            <p>Consider phosphorus supplement in 2-3 weeks</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="comparison-chart">
+                    <h3>Performance Comparison</h3>
+                    <img src="https://ppl-ai-code-interpreter-files.s3.amazonaws.com/web/direct-files/2a766ee1f53d4b0ed089cb2b53a38e6e/7ac68690-031d-400a-af15-b6f416d2ecdf/3cf87723.png" alt="Smart Agriculture vs Traditional Farming Performance Comparison" class="chart-image">
+                </div>
+            </div>
+
+            <!-- Settings Screen -->
+            <div class="screen" id="settings">
+                <div class="screen-header">
+                    <h2>Settings</h2>
+                    <p class="subtitle">Configuration & Preferences</p>
+                </div>
+
+                <div class="settings-section">
+                    <h3>Field Configuration</h3>
+                    <div class="form-group">
+                        <label class="form-label">Area Coverage</label>
+                        <select class="form-control">
+                            <option value="1">1 Acre</option>
+                            <option value="0.5">0.5 Acre</option>
+                            <option value="2">2 Acres</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Soil Type</label>
+                        <select class="form-control">
+                            <option value="loam">Loam</option>
+                            <option value="clay">Clay</option>
+                            <option value="sandy">Sandy</option>
+                            <option value="silt">Silt</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Crop Type</label>
+                        <select class="form-control">
+                            <option value="wheat">Wheat</option>
+                            <option value="corn">Corn</option>
+                            <option value="rice">Rice</option>
+                            <option value="vegetables">Vegetables</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h3>Alert Thresholds</h3>
+                    <div class="threshold-item">
+                        <label class="form-label">Soil Moisture (Low)</label>
+                        <div class="threshold-input">
+                            <input type="range" class="threshold-slider" min="0" max="100" value="30">
+                            <span class="threshold-value">30%</span>
+                        </div>
+                    </div>
+                    <div class="threshold-item">
+                        <label class="form-label">Temperature (High)</label>
+                        <div class="threshold-input">
+                            <input type="range" class="threshold-slider" min="20" max="40" value="35">
+                            <span class="threshold-value">35°C</span>
+                        </div>
+                    </div>
+                    <div class="threshold-item">
+                        <label class="form-label">pH Level (Low)</label>
+                        <div class="threshold-input">
+                            <input type="range" class="threshold-slider" min="5" max="8" value="6" step="0.1">
+                            <span class="threshold-value">6.0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h3>Notifications</h3>
+                    <div class="notification-item">
+                        <label class="notification-label">
+                            <input type="checkbox" checked>
+                            <span class="checkmark"></span>
+                            System Alerts
+                        </label>
+                    </div>
+                    <div class="notification-item">
+                        <label class="notification-label">
+                            <input type="checkbox" checked>
+                            <span class="checkmark"></span>
+                            Irrigation Reminders
+                        </label>
+                    </div>
+                    <div class="notification-item">
+                        <label class="notification-label">
+                            <input type="checkbox">
+                            <span class="checkmark"></span>
+                            Weather Updates
+                        </label>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h3>System Information</h3>
+                    <div class="system-info">
+                        <img src="https://ppl-ai-code-interpreter-files.s3.amazonaws.com/web/direct-files/2a766ee1f53d4b0ed089cb2b53a38e6e/0f6cf6c8-82df-45d0-abbd-605a02a17757/3730e74c.png" alt="Plant Monitoring System Components" class="system-diagram">
+                        <div class="info-item">
+                            <span class="info-label">Version:</span>
+                            <span class="info-value">v2.1.0</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Last Update:</span>
+                            <span class="info-value">July 17, 2025</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Sensors:</span>
+                            <span class="info-value">12 Active</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="settings-actions">
+                    <button class="btn btn--primary">Save Settings</button>
+                    <button class="btn btn--outline">Reset to Default</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
